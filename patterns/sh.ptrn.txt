@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --job-name  {fname}_pm7
+#SBATCH --partition batch
+#SBATCH -N          1
+#SBATCH --ntasks    24
+#SBATCH --time      01:00:00
+#SBATCH --output    {fname}_pm7.out
+#SBATCH --error     {fname}_pm7.err
+
+source /users/pilot/apl/modules/3.2.10/Modules/3.2.10/init/bash
+module load tryton/gaussian/g16.b01
+
+g16 {fname}_pm7.com >> {fname}_pm7.log

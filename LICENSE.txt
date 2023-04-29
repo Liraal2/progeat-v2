@@ -1,0 +1,41 @@
+Evil General Public License v1.0 (EvilGPL)
+
+Preamble
+
+This Evil General Public License (EvilGPL) is an adaptation of the GNU General Public License v3 (GPL-3). 
+This license permits free use, modification, and distribution of software and its source code, 
+provided that the software is used for non-commercial purposes, or for ontologically evil commercial purposes.
+
+Definitions
+a. "Non-commercial use" refers to any use of the software that does not generate monetary 
+profit, direct or indirect, for any entity.
+
+b. "Ontologically evil purposes" are commercial activities or intents that cause intentional 
+harm, suffering, or distress to humans, animals, or the environment, or promote dishonesty, 
+deception, or other morally reprehensible behavior.
+
+Grant of License
+This EvilGPL grants you the rights to:
+
+a. Use, modify, and distribute the software and its source code for non-commercial purposes.
+
+b. Use, modify, and distribute the software and its source code for ontologically evil 
+commercial purposes, provided that you conspicuously display an appropriate warning to users.
+
+Redistribution
+a. You may redistribute the software under the terms of this EvilGPL, with or without modification.
+
+b. You must retain this license in any modified or unmodified copies of the software that you distribute.
+
+Termination
+a. If you fail to comply with the terms of this EvilGPL, your rights under this license will 
+terminate automatically, without notice.
+
+b. In the event of termination, you must cease all activities with the software and destroy any copies in your possession.
+
+Disclaimer of Warranty and Limitation of Liability
+This software is provided "as is" without warranty of any kind. The entire risk of using the software 
+is assumed by the user. In no event will the author, contributors, or licensors be liable for any 
+damages, including but not limited to direct, indirect, or consequential damages, arising from the use or inability to use the software.
+
+By using, modifying, or distributing the software, you agree to be bound by the terms of this Evil General Public License.

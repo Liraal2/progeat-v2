@@ -1,0 +1,12 @@
+%mem=100GB
+%nproc=24
+%Chk={fname}_pm7.chk
+#P PM7 Opt=(MaxCycle=1000,Tight) Freq
+#P SCF=(MaxCycle=1000,Tight,Direct,Save) NoSymm Pop=(Minimal,Bonding) Int=(Grid=Ultrafine)
+
+ {fname}
+
+{overrideString}
+{content}
+
+{fname}_pm7.wfn
