@@ -15,8 +15,14 @@ Progeat-v2.0 is a Python-based application that processes .cml files and generat
     - Avogadro (optional)
 ## Installation
 1. Clone the repository or download the source files.
-2. Install the required dependencies:
+2. Install the required dependencies via setup script on Windows:
 ```
+setup.bat
+```
+or manually for Linux:
+```
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 ## Configuration
@@ -28,11 +34,17 @@ Create a config.json file in the project directory and customize the settings ac
 }
 ```
 ## Usage
-Run the main.py script to launch the application:
+Run the launch.bat script to launch the application:
 
 ```
-python main.py
+launch.bat
 ```
+or launch manually for Linux:
+```
+source venv/bin/activate
+python progeat-v2.0.py
+```
+
 Use the GUI to input the required information:
 
 - Filepath: The path to the .cml file you want to process.
