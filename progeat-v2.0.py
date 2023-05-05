@@ -70,10 +70,9 @@ class ProgeatApp(QWidget):
         self.overrideField.move(180, 260)
         self.overrideField.setFixedWidth(400)
         # Avogadro checkbox
-        cb = QCheckBox('Use Avogadro?', self)
-        cb.move(10, 300)
-        cb.toggle() # Set checkbox to checked by default
-        cb.stateChanged.connect(self.changeTitle)
+        self.cb = QCheckBox('Use Avogadro?', self)
+        self.cb.move(10, 300)
+        self.cb.stateChanged.connect(self.changeTitle)
         # Create a button widget
         button = QPushButton('RUN', self)
         button.move(10, 340)
@@ -93,8 +92,7 @@ class ProgeatApp(QWidget):
         path = self.pathField.text()
         if not path:
             dialog = QFileDialog()
-            dialog.setFileMode(QFileDialog.AnyFile)
-            dialog.setNameFilter('Cml files (*.cml)')
+            dialog.setFileMode(QFileDialog.Directory)  # Change file mode to Directory
             dialog.setOption(QFileDialog.DontUseNativeDialog, True)
             if dialog.exec_():
                 path = dialog.selectedFiles()[0]
@@ -102,8 +100,15 @@ class ProgeatApp(QWidget):
                 return
             self.pathField.setText(path)
         filename = self.nameField.text() if self.nameField.text() else None
-        self.file_processor.processFile(path, self.overrideField.text(), filename)
-        self.doneLabel.setText("F|{0}|Complete".format(os.path.basename(path)))
+
+        # Iterate over all files in the directory
+        for file in os.listdir(path):
+            file_path = os.path.join(path, file)
+            # Check if the file has a .cml extension
+            if file.endswith('.cml'):
+                self.file_processor.processFile(file_path, self.overrideField.text(), filename)
+                self.doneLabel.setText("F|{0}|Complete".format(os.path.basename(file_path)))
+
         
     def changeTitle(self, state):
         """
@@ -128,6 +133,8 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # Create a new window object
     window = ProgeatApp()
+    if config.get('use_avogadro'):
+        window.cb.toggle()
     # Show the window
     window.show()
     # Run the event loop

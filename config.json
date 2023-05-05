@@ -1,4 +1,4 @@
 {
-    "output_dir_path": null,
-    "use_avogadro": true
+    "output_dir_path": ".",
+    "use_avogadro": false
 }
