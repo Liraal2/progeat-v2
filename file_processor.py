@@ -10,8 +10,9 @@
 #╰─────────────────────────────────────────────╯
 
 import os
+import re
 import time
-import xml.etree.ElementTree
+import xml.etree.ElementTree as ET
 
 import pyautogui
 import pyperclip
@@ -62,15 +63,30 @@ class FileProcessor:
         return table
 
     def openXML(self, path):
-        #Parse the XML file
-        tree = xml.etree.ElementTree.parse(path)
-        #Get the root element of the XML tree
-        root = tree.getroot()
-        #Create output string
+        # Read the XML file as a string
+        with open(path, 'r') as file:
+            xml_str = file.read()
+
+        # Remove the namespaces from the XML string
+        xml_str = re.sub(' xmlns="[^"]+"', '', xml_str)
+        xml_str = re.sub(' xmlns:ns0="[^"]+"', '', xml_str)
+
+        # Parse the XML string
+        root = ET.fromstring(xml_str)
+
+        # Create output string
         result = ""
-        #Iterate through the atom elements
-        for atom in root.find('{http://www.xml-cml.org/schema}atomArray').findall('{http://www.xml-cml.org/schema}atom'):
-            result = result + "{:6}{: 6f}   {: 6f}   {: 6f}\n".format(atom.get('elementType'), float(atom.get('x3')),float(atom.get('y3')),float(atom.get('z3')))
+
+        # Find the atomArray element
+        atom_array = root.find('atomArray')
+
+        if atom_array is not None:
+            # Iterate through the atom elements
+            for atom in atom_array.findall('atom'):
+                result = result + "{:6}{: 6f}   {: 6f}   {: 6f}\n".format(atom.get('elementType'), float(atom.get('x3')), float(atom.get('y3')), float(atom.get('z3')))
+        else:
+            print("Error: No atomArray element found in the XML file.")
+
         return result.rstrip()
 
     #Process singular .cml file
@@ -83,6 +99,8 @@ class FileProcessor:
         
         #Get base output dir from outputDirPath or input dir if outputDirPath not set
         outputPath = self.config.get('output_dir_path') if self.config.get('output_dir_path') is not None else os.path.split(path)[0]
+        
+        filename = ''.join(c for c in filename if c.isalnum())
         #Attach dir name
         outputPath = os.path.join(outputPath, filename)
         #Check if dir exists
